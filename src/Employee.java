@@ -1,11 +1,12 @@
 import java.util.Arrays;
 import java.util.*;
+import java.text.DecimalFormat;
 public class Employee implements IEmployee{
     public String name;
     public double salary;
     public double workHours; // it defines weekly working hours. It might be like 40.5 that is the reason double definition
     public int hireYear;
-    public  Employee(String name,float salary,int workHours,int hireYear) {
+    public  Employee(String name,float salary,double workHours,int hireYear) {
         this.name =name;
         this.salary = salary;
         this.workHours = workHours;
@@ -20,7 +21,7 @@ public class Employee implements IEmployee{
     }
     public double raiseSalary(){
 
-        double raiseAmountDue = 0;
+        double raiseAmountDue;
         double raiesedSalary = this.salary;
         int workingYear = 2021-this.hireYear;
 
@@ -37,7 +38,7 @@ public class Employee implements IEmployee{
         raiesedSalary -=  tax(raiesedSalary);
 
 
-        return  raiesedSalary;
+        return  Math.round(raiesedSalary * 100.0) / 100.0;
     }
     public String toString() {
         String info = "Employee -> " +
@@ -46,7 +47,7 @@ public class Employee implements IEmployee{
                 "\nWorking hours : " + workHours +
                 "\nBefore raised salary  : " + salary +
                 "\nBonus : " + bonus() +
-                "\nTax : " + (raiseSalary()-bonus()-salary)+
+                "\nTax : " + Math.round((raiseSalary()-bonus()-salary) * 100.0) / 100.0 +
                 "\nAfter raising salary  : " + raiseSalary();
         System.out.println(info);
         return super.toString();
